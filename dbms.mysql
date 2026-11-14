@@ -1,0 +1,53 @@
+CREATE database makkalapp;
+USE makkalapp;
+CREATE TABLE student (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    Course VARCHAR(100)
+);
+-- data create query
+INSERT INTO student (name , email,Course) VALUES ('Hari','hari@gmail.com','Web developer');
+INSERT INTO student (name , email,Course) VALUES ('Ajitha','ajitha@gmail.com','MERN stack developer');
+-- View data query
+SELECT*FROM student; 
+-- update query
+UPDATE student 
+SET Course = 'Computer Science' 
+WHERE id = 1;
+ 
+-- delete query
+DELETE FROM student 
+WHERE id = 2; 
+
+-- forigen key 
+
+-- 1. Create the Parent Table
+CREATE TABLE courses (
+    course_id INT PRIMARY KEY AUTO_INCREMENT,
+    course_name VARCHAR(100) NOT NULL,
+    duration_months INT
+); 
+
+-- 2. Create the Child Table with a Foreign Key
+CREATE TABLE students_details (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    course_id INT,
+    FOREIGN KEY (course_id) REFERENCES courses(course_id)
+); 
+
+SELECT*FROM  courses;
+ 
+ -- Step 1: Add courses first
+INSERT INTO courses (course_name, duration_months) 
+VALUES ('Computer Science', 36), ('Data Science', 24); 
+
+SELECT*FROM  students_details; 
+
+-- Step 2: Add students using valid course_id values (1 or 2)
+INSERT INTO students_details (name, email, course_id) 
+VALUES ('Priya Patel', 'priya@example.com', 1);
+ 
+ SELECT*FROM  courses;
